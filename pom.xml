@@ -92,7 +92,7 @@
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.0.5</version>
+            <version>1.8.5</version>
         </dependency>
         <!--mybatis 与spring 的核心包-->
         <dependency>
@@ -107,12 +107,6 @@
             <version>1.2.2</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.0.5</version>
-        </dependency>
-
         <!--前端页面-->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -122,7 +116,7 @@
 
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
-            <artifactId>javax-servlet.jsp-api</artifactId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
             <version>2.3.2-b01</version>
         </dependency>
 
@@ -135,9 +129,10 @@
         <!--mysql驱动包-->
         <dependency>
             <groupId>mysql</groupId>
-            <artifactId>mysql-cinnector-java</artifactId>
+            <artifactId>mysql-connector-java</artifactId>
             <version>5.1.34</version>
         </dependency>
+
         <!--连接池包-->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -192,8 +187,9 @@
         </dependency>
     </dependencies>
 
+    <!--构建时加载-->
     <build>
-        <finalName>coding</finalName>
+        <!--加载某某文件下的xml（加载dao下面的xml文件）-->
         <resources>
             <resource>
                 <directory>src/mian/java</directory>
@@ -201,8 +197,22 @@
                     <include>**/*.xml</include>
                 </includes>
             </resource>
+
+            <!--过滤配置-->
+            <!--是否要过滤-->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
         </resources>
-        <!--加载某某文件下的xml-->
+
+        <!--过滤的文件在哪-->
+        <filters>
+            <filter>src/main/filters/${env}/jdbc-${env}.properties}</filter>
+            <filter>src/main/filters/${env}/generatorConfig-${env}.xml}</filter>
+        </filters>
+
+        <finalName>coding</finalName>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
                 <!-- 反向映射（自动生成，查询语句） -->
@@ -215,7 +225,6 @@
                         <overwrite>true</overwrite>
                     </configuration>
                 </plugin>
-
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>3.0.0</version>
@@ -245,11 +254,41 @@
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>2.8.2</version>
                 </plugin>
-
-
-
             </plugins>
         </pluginManagement>
-
     </build>
+
+    <!--家里的文件配置-->
+    <profiles>
+        <profile>
+            <id>home</id>
+            <properties>
+                <env>home</env>
+            </properties>
+            <!--默认使用哪种配置-->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <!--构建是使用哪种文件-->
+            <build>
+                <filters>
+                    <filter>src/main/filters/home/jdbc-home.properties</filter>
+                    <filter>src/main/filters/home/generatorConfig-home.xml</filter>
+                </filters>
+            </build>
+        </profile>
+        <!--公司的文件配置-->
+        <profile>
+            <id>company</id>
+            <properties>
+                <env>company</env>
+            </properties>
+            <build>
+                <filters>
+                    <filter>src/main/filters/company/jdbc-company.properties</filter>
+                    <filter>src/main/filters/company/generatorConfig-company.xml</filter>
+                </filters>
+            </build>
+        </profile>
+    </profiles>
 </project>
