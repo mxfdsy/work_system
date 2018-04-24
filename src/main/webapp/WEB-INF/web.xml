@@ -1,7 +1,39 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+         <web-app xmlns="http://java.sun.com/xml/ns/javaee"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                              http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
 
-<web-app>
-  <display-name>Archetype Created Web Application</display-name>
+
+    <display-name>work_system</display-name>
+    <!--告诉我们的spring的配置文件在哪-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring-cfg.xml</param-value>
+    </context-param>
+
+    <!-- 过滤器配置信息 -->
+    <filter>
+        <filter-name>SetCharacterEncodingFilter</filter-name>
+        <!-- 过滤器设置编码文件 -->
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <!--xml约束-->
+        <async-supported>true</async-supported>
+        <init-param>
+            <!--
+             init-param元素定义了过滤器的初始化参数
+             -->
+            <param-name>ecoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <!--
+         filter-mapping告诉容器所有与模式向匹配的请求都应该允许通过访问控制过滤器。
+         所有以.do结尾的访问都先通过过滤器文件过滤
+        -->
+        <filter-name>SetCharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>
