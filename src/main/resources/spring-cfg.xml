@@ -25,7 +25,7 @@
             location="classpath:jdbc.properties"/>
 
     <!--mybatis配置-->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
         <property name="dataSource" ref="dataSource"/>
          <!--你的mapperxml信息在哪-->
         <property name="mapperLocations" value="com/coding/**/**.xml"/>
@@ -44,35 +44,33 @@
     </bean>
 
         <!-- 阿里 druid 数据库连接池 (数据源)-->
-    <bean id = "dataSource" class = "com.alibaba.druid.pool.DruidDataSource" destroy-method = "close" >
+    <bean id = "dataSource" class = "com.alibaba.druid.pool.DruidDataSource" destroy-method="close" init-method="init">
         <!-- 数据库基本信息配置 -->
-        <property name = "url" value = "${url}" />
-        <property name = "username" value = "${username}" />
-        <property name = "password" value = "${password}" />
-        <property name = "driverClassName" value = "${driverClassName}" />
-        <property name = "filters" value = "${filters}" />
+        <property name = "url" value = "${jdbc.url}" />
+        <property name = "username" value = "${jdbc.username}" />
+        <property name = "password" value = "${jdbc.password}" />
+        <property name = "driverClassName" value = "${jdbc.driver}" />
         <!-- 最大并发连接数 -->
-        <property name = "maxActive" value = "${maxActive}" />
+        <property name = "maxActive" value = "1" />
         <!-- 初始化连接数量 -->
-        <property name = "initialSize" value = "${initialSize}" />
+        <property name = "initialSize" value = "20" />
         <!-- 配置获取连接等待超时的时间 -->
-        <property name = "maxWait" value = "${maxWait}"/>
+        <property name = "maxWait" value = "600" />
         <!-- 最小空闲连接数 -->
-        <property name = "minIdle" value = "${minIdle}" />
+        <property name = "minIdle" value = "600" />
         <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-        <property name = "timeBetweenEvictionRunsMillis" value ="${timeBetweenEvictionRunsMillis}" />
+         <property name = "timeBetweenEvictionRunsMillis" value ="500" />
         <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-        <property name = "minEvictableIdleTimeMillis" value ="${minEvictableIdleTimeMillis}" />
+        <property name = "minEvictableIdleTimeMillis" value ="30" />
         <property name = "validationQuery" value = "${validationQuery}" />
-        <property name = "testWhileIdle" value = "${testWhileIdle}" />
-        <property name = "testOnBorrow" value = "${testOnBorrow}" />
-        <property name = "testOnReturn" value = "${testOnReturn}" />
-        <property name = "maxOpenPreparedStatements" value ="${maxOpenPreparedStatements}" />
+        <property name = "testWhileIdle" value = "false" />
+        <property name = "testOnBorrow" value = "false" />
+        <property name = "testOnReturn" value = "false" />
         <!-- 打开 removeAbandoned 功能 -->
-        <property name = "removeAbandoned" value = "${removeAbandoned}" />
+        <property name = "removeAbandoned" value = "true" />
         <!-- 1800 秒，也就是 30 分钟 -->
-        <property name = "removeAbandonedTimeout" value ="${removeAbandonedTimeout}" />
+        <property name = "removeAbandonedTimeout" value ="1800" />
         <!-- 关闭 abanded 连接时输出错误日志 -->
-        <property name = "logAbandoned" value = "${logAbandoned}" />
-    </bean>
+        <property name = "logAbandoned" value = "true" />
+    </bean >
 </beans>
