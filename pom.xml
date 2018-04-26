@@ -193,39 +193,39 @@
         </dependency>
     </dependencies>
 
-    <!--家里的文件配置-->
-    <profiles>
-        <profile>
-            <id>home</id>
-            <properties>
-                <env>home</env>
-            </properties>
-            <!--默认使用哪种配置-->
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <!--构建是使用哪种文件-->
-            <build>
-                <filters>
-                    <filter>src/main/filters/home/jdbc-home.properties</filter>
-                    <!--<filter>src/main/filters/home/generatorConfig-home.xml</filter>-->
-                </filters>
-            </build>
-        </profile>
-        <!--公司的文件配置-->
-        <profile>
-            <id>company</id>
-            <properties>
-                <env>company</env>
-            </properties>
-            <build>
-                <filters>
-                    <filter>src/main/filters/company/jdbc-company.properties</filter>
-                    <!--<filter>src/main/filters/compgeneratorConfig.xml.xml</filter>-->
-                </filters>
-            </build>
-        </profile>
-    </profiles>
+    <!--&lt;!&ndash;家里的文件配置&ndash;&gt;-->
+    <!--<profiles>-->
+        <!--<profile>-->
+            <!--<id>home</id>-->
+            <!--<properties>-->
+                <!--<env>home</env>-->
+            <!--</properties>-->
+            <!--&lt;!&ndash;默认使用哪种配置&ndash;&gt;-->
+            <!--<activation>-->
+                <!--<activeByDefault>true</activeByDefault>-->
+            <!--</activation>-->
+            <!--&lt;!&ndash;构建是使用哪种文件&ndash;&gt;-->
+            <!--<build>-->
+                <!--<filters>-->
+                    <!--<filter>src/main/filters/home/jdbc-home.properties</filter>-->
+                    <!--&lt;!&ndash;<filter>src/main/filters/home/generatorConfig-home.xml</filter>&ndash;&gt;-->
+                <!--</filters>-->
+            <!--</build>-->
+        <!--</profile>-->
+        <!--&lt;!&ndash;公司的文件配置&ndash;&gt;-->
+        <!--<profile>-->
+            <!--<id>company</id>-->
+            <!--<properties>-->
+                <!--<env>company</env>-->
+            <!--</properties>-->
+            <!--<build>-->
+                <!--<filters>-->
+                    <!--<filter>src/main/filters/compjdbc.propertiesties</filter>-->
+                    <!--&lt;!&ndash;<filter>src/main/filters/compgeneratorConfig.xml.xml</filter>&ndash;&gt;-->
+                <!--</filters>-->
+            <!--</build>-->
+        <!--</profile>-->
+    <!--</profiles>-->
     <!--构建时加载-->
     <build>
         <!--加载某某文件下的xml（加载dao下面的xml文件）-->
@@ -239,17 +239,17 @@
 
             <!--过滤配置-->
             <!--是否要过滤-->
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
+            <!--<resource>-->
+                <!--<directory>src/main/resources</directory>-->
+                <!--<filtering>true</filtering>-->
+            <!--</resource>-->
         </resources>
 
         <!--过滤的文件在哪-->
-        <filters>
-            <filter>src/main/filters/${env}/jdbc-${env}.properties</filter>
-            <!--<filter>src/main/filters/${env}/generatorConfig-${env}.xml</filter>-->
-        </filters>
+        <!--<filters>-->
+            <!--<filter>src/main/filters/${env}/jdbc-${env}.properties</filter>-->
+            <!--&lt;!&ndash;<filter>src/main/filters/${env}/generatorConfig-${env}.xml</filter>&ndash;&gt;-->
+        <!--</filters>-->
 
         <plugins>
             <plugin>

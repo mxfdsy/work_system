@@ -20,9 +20,9 @@
     <!--包扫描-->
     <context:component-scan base-package="com.coding"/>
 
-    jdbc加载配置文件
+    <!--jdbc加载配置文件-->
     <context:property-placeholder
-            location="classpath:jdbc-${env}.properties"/>
+            location="classpath:jdbc.properties"/>
 
     <!--mybatis配置-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
